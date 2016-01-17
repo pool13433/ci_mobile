@@ -2,6 +2,8 @@
 
 class Brand extends CI_Controller {
 
+    public $data = array();
+
     public function __construct() {
         parent::__construct();
         header("Access-Control-Allow-Origin: *");
@@ -9,6 +11,14 @@ class Brand extends CI_Controller {
         $this->load->library('myutil');
         $this->load->library('session');
         $this->load->database();
+
+        $this->data['params'] = array(
+            'param1' => '',
+            'param2' => '',
+            'param3' => '',
+            'param4' => '',
+            'param5' => '',
+        );
     }
 
     public function index($id = null) {
@@ -16,24 +26,24 @@ class Brand extends CI_Controller {
         $this->datamodel->table_name = ' mbrand bb';
         $this->datamodel->field_name = "*";
         $this->datamodel->condition = ' ';
-        $data['list_brand'] = $this->datamodel->list_data();
+        $this->data['list_brand'] = $this->datamodel->list_data();
 
         if ($id != null) {
             $this->datamodel->field_name = "*";
             $this->datamodel->table_name = ' mbrand bb';
             $this->datamodel->condition = 'where bb.brand_id=' . $id;
             $this->datamodel->order = '';
-            $data['data_brand'] = $this->datamodel->data();
+            $this->data['data_brand'] = $this->datamodel->data();
         } else {
-            $data['data_brand'] = (object) array(
+            $this->data['data_brand'] = (object) array(
                         'brand_id' => '',
                         'name_th' => '',
                         'name_en' => '',
                         'logo' => ''
             );
         }
-        $this->load->view('header');
-        $this->load->view('/admin/brand', $data);
+        $this->load->view('header', $this->data);
+        $this->load->view('/admin/brand', $this->data);
         $this->load->view('footer');
     }
 
@@ -42,16 +52,16 @@ class Brand extends CI_Controller {
         $nameTh = $_POST['name_th'];
         $nameEng = $_POST['name_eng'];
         $logo = '';
-        $data = array(            
+        $this->data = array(
             'name_th' => $nameTh,
             'name_en' => $nameEng,
             'logo' => $logo,
         );
-        if(empty($brand_id)){
-            $exe = $this->db->insert('mbrand', $data);
-        }else{
-            $this->db->where('brand_id',$brand_id);
-            $exe = $this->db->update('mbrand', $data);
+        if (empty($brand_id)) {
+            $exe = $this->db->insert('mbrand', $this->data);
+        } else {
+            $this->db->where('brand_id', $brand_id);
+            $exe = $this->db->update('mbrand', $this->data);
         }
         redirect('brand/index', 'refresh');
     }

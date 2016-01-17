@@ -44,7 +44,7 @@
                     <?php foreach ($list_brand as $key => $brand) { ?>
                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                             <!-- small box -->
-                            <div class="small-box <?php echo (empty($colors[$key]) ? '' : $colors[$key]) ?>">
+                            <div class="small-box <?php echo (empty($colors[$key]) ? 'bg-gray' : $colors[$key]) ?>">
                                 <div class="inner">
                                     <h3>
                                         <?= $brand->name_th ?>
@@ -87,7 +87,7 @@
                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                     <a href="<?= site_url('mobile/search?param4=cpu_core&param5=' . $core->data_value) ?>">
                                         <!-- Danger box -->
-                                        <div class="small-box <?php echo $colors[$key] ?>">
+                                        <div class="small-box <?=(empty($colors[$key]) ? 'bg-gray' : $colors[$key])?>">
                                             <div class="inner">
                                                 <h3>
                                                     <?= $core->data_value ?> Ghz 
@@ -116,7 +116,7 @@
                             <?php foreach ($list_cpu_vol as $key => $vol) { ?>                                            
                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                     <a href="<?= site_url('mobile/search?param4=cpu_vol&param5=' . $vol->data_value) ?>">
-                                        <div class="small-box <?php echo $colors[$key] ?>">
+                                        <div class="small-box <?=(empty($colors[$key]) ? 'bg-gray' : $colors[$key])?>">
                                             <div class="inner">
                                                 <h3>
                                                     <?= $vol->data_value ?> Core 
@@ -146,7 +146,7 @@
                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                     <a href="<?= site_url('mobile/search?param4=ram&param5=' . $ram->data_value) ?>">
                                         <!-- Danger box -->
-                                        <div class="small-box <?php echo $colors[$key] ?>">
+                                        <div class="small-box <?=(empty($colors[$key]) ? 'bg-gray' : $colors[$key])?>">
                                             <div class="inner">
                                                 <h3>
                                                     <?= $ram->data_value ?> GB
@@ -175,7 +175,7 @@
                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                     <a href="<?= site_url('mobile/search?param4=batt&param5=' . $batt->data_value) ?>">
                                         <!-- Danger box -->
-                                        <div class="small-box <?php echo $colors[$key] ?>">
+                                        <div class="small-box <?=(empty($colors[$key]) ? 'bg-gray' : $colors[$key])?>">
                                             <div class="inner">
                                                 <h3>
                                                     <?= $batt->data_value ?> Mah
@@ -212,7 +212,7 @@
                             <?php foreach ($list_cam_f as $key => $camf) { ?>                                            
                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                     <a href="<?= site_url('mobile/search?param4=cam_f&param5=' . $camf->data_value) ?>">
-                                        <div class="small-box <?php echo $colors[$key] ?>">
+                                        <div class="small-box <?=(empty($colors[$key]) ? 'bg-gray' : $colors[$key])?>">
                                             <div class="inner">
                                                 <h3>
                                                     <?= $camf->data_value ?> MP
@@ -241,7 +241,7 @@
                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                     <a href="<?= site_url('mobile/search?param4=cam_b&param5=' . $camb->data_value) ?>">
                                         <!-- Danger box -->
-                                        <div class="small-box <?php echo $colors[$key] ?>">
+                                        <div class="small-box <?=(empty($colors[$key]) ? 'bg-gray' : $colors[$key])?>">
                                             <div class="inner">
                                                 <h3>
                                                     <?= $camb->data_value ?> MP
@@ -270,7 +270,7 @@
                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                     <a href="<?= site_url('mobile/search?param4=rom_in&param5=' . $rom->data_value) ?>">
                                         <!-- Danger box -->
-                                        <div class="small-box <?php echo $colors[$key] ?>">
+                                        <div class="small-box <?=(empty($colors[$key]) ? 'bg-gray' : $colors[$key])?>">
                                             <div class="inner">
                                                 <h3>
                                                     <?= $rom->data_value ?> GB
@@ -299,7 +299,7 @@
                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                     <a href="<?= site_url('mobile/search?param4=rom_ext&param5=' . $romext->data_value) ?>">
                                         <!-- Danger box -->
-                                        <div class="small-box <?php echo $colors[$key] ?>">
+                                        <div class="small-box <?=(empty($colors[$key]) ? 'bg-gray' : $colors[$key])?>">
                                             <div class="inner">
                                                 <h3>
                                                     <?= $romext->data_value ?>  GB
@@ -336,7 +336,7 @@
                             <?php foreach ($list_screen as $key => $screen) { ?>                                            
                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                     <a href="<?= site_url('mobile/search?param4=screen_size&param5=' . $screen->data_value) ?>">
-                                        <div class="small-box <?php echo $colors[$key] ?>">
+                                        <div class="small-box <?=(empty($colors[$key]) ? 'bg-gray' : $colors[$key])?>">
                                             <div class="inner">
                                                 <h3>
                                                     <?= $screen->data_value ?> Inch
@@ -365,7 +365,7 @@
                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                     <a href="<?= site_url('mobile/search?param4=weight&param5=' . $weight->data_value) ?>">
                                         <!-- Danger box -->
-                                        <div class="small-box <?php echo $colors[$key] ?>">
+                                        <div class="small-box <?=(empty($colors[$key]) ? 'bg-gray' : $colors[$key])?>">
                                             <div class="inner">
                                                 <h3>
                                                     <?= $weight->data_value ?> กรัม
@@ -394,7 +394,7 @@
                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                     <a href="<?= site_url('mobile/search?param4=sim&param5=' . $sim->data_value) ?>">
                                         <!-- Danger box -->
-                                        <div class="small-box <?php echo $colors[$key] ?>">
+                                        <div class="small-box <?=(empty($colors[$key]) ? 'bg-gray' : $colors[$key])?>">
                                             <div class="inner">
                                                 <h3>
                                                     <?= $sim->data_value ?> Sim

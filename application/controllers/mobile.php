@@ -16,7 +16,7 @@ class Mobile extends CI_Controller {
         $this->datamodel->field_name = " bb.*,(select count(*) from mproduct where bb.brand_id=brand_id)  cnt ";
         $this->datamodel->condition = ' order by cnt desc ';
         $this->data['list_brand'] = $this->datamodel->list_data_join();
-        
+
         $this->data['params'] = array(
             'param1' => '',
             'param2' => '',
@@ -101,6 +101,7 @@ class Mobile extends CI_Controller {
         $param3 = (empty($_GET['param3']) ? '' : $_GET['param3']);
         $param4 = (empty($_GET['param4']) ? '' : $_GET['param4']);
         $param5 = (empty($_GET['param5']) ? '' : $_GET['param5']);
+        $productId = (empty($_GET['productId']) ? '' : $_GET['productId']);
 
         $this->load->model('datamodel');
         $this->datamodel->field_name = ' * ';
@@ -135,7 +136,10 @@ class Mobile extends CI_Controller {
         if (!empty($param4) && (!empty($param5) || intval($param5))) {
             $conditions .= ' AND ' . $param4 . ' = \'' . $param5 . '\'';
         }
-        $conditions .= ' ORDER BY brand_id DESC';
+        if (intval($productId)) {
+            $conditions .= ' AND product_id != ' . $productId;
+        }
+        $conditions .= ' ORDER BY brand_id,product_name DESC';
         //var_dump($conditions);
 
         $this->datamodel->condition = $conditions;
@@ -146,7 +150,22 @@ class Mobile extends CI_Controller {
         $this->datamodel->table_name = ' mbrand';
         $this->datamodel->condition = ' ORDER BY name_th ASC';
         $this->data['brands'] = $this->datamodel->list_data();
-        
+
+        if (empty($param2)) {
+            $this->data['brand'] = (object)array(
+                'brand_id' => '',
+                'name_th' => '',
+                'name_en' => '',
+                'logo' => '',
+                'cnt' => '',
+            );
+        } else {
+            $this->datamodel->table_name = ' mbrand bb';
+            $this->datamodel->field_name = " bb.*,(select count(*) from mproduct where bb.brand_id=brand_id)  cnt ";
+            $this->datamodel->condition = ' where bb.brand_id = ' . $param2;
+            $this->data['brand'] = $this->datamodel->data();
+        }
+
         $this->data['params'] = array(
             'param1' => $param1,
             'param2' => $param2,
@@ -154,6 +173,7 @@ class Mobile extends CI_Controller {
             'param4' => $param4,
             'param5' => $param5,
         );
+        $this->data['colors'] = $this->myutil->colors;
 
         $this->load->view('header', $this->data);
         $this->load->view('items', $this->data);
@@ -161,15 +181,16 @@ class Mobile extends CI_Controller {
     }
 
     public function item($id) {
-        
+
         $param1 = $_GET['param1'];
         $param2 = $_GET['param2'];
-        
+
+
         $this->load->model('datamodel');
 
-        $this->datamodel->table_name = ' mproduct';
-        $this->datamodel->field_name = ' * ';
-        $this->datamodel->condition = ' WHERE product_id = ' . $id;
+        $this->datamodel->table_name = ' mproduct p,mbrand b';
+        $this->datamodel->field_name = ' p.*,b.name_th brand_name ';
+        $this->datamodel->condition = ' WHERE p.brand_id = b.brand_id AND product_id = ' . $id;
         $this->data['product'] = $this->datamodel->data();
 
         $this->datamodel->field_name = ' * ';
@@ -180,7 +201,8 @@ class Mobile extends CI_Controller {
         $this->data['performanc_attr'] = $this->myutil->performanc_attr;
         $this->data['mutimedia_attr'] = $this->myutil->mutimedia_attr;
         $this->data['ass_attr'] = $this->myutil->ass_attr;
-        
+        $this->data['feature'] = $this->myutil->features;
+
         $this->data['params']['param1'] = $param1;
         $this->data['params']['param2'] = $param2;
 

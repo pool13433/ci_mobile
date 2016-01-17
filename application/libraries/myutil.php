@@ -10,7 +10,26 @@ class myutil {
         'bg-blue', 'bg-maroon', 'bg-light-blue', 'bg-green', 'bg-navy',
         'bg-lime', 'bg-orange', 'bg-olive', 'bg-teal',
         'bg-fuchsia', 'bg-purple', 'bg-black');
-    
+    public $features = array(
+        array(
+            'variable_loop' => 'performanc_attr',
+            'name' => 'performanc',
+            'name_desc' => 'เน้นประสิทธิภาพ',
+            'color' => 'bg-yellow'
+        ),
+        array(
+            'variable_loop' => 'mutimedia_attr',
+            'name' => 'mutimedia',
+            'name_desc' => 'เน้นถ่ายรูป เซลฟี่',
+            'color' => 'bg-teal'
+        ),
+        array(
+            'variable_loop' => 'ass_attr',
+            'name' => 'accessory',
+            'name_desc' => 'เน้นประโยชน์ใช้สอย',
+            'color' => 'bg-fuchsia'
+        ),
+    );
     public $performanc_attr = array(
         'cpu_core' => array(
             'caption' => 'Ghz',
@@ -55,7 +74,7 @@ class myutil {
             'icon' => 'fa fa-credit-card'
         ),
     );
-    public $ass_attr = array(        
+    public $ass_attr = array(
         'screen_size' => array(
             'caption' => 'นิ้ว',
             'desc' => 'ขนาดหน้าจอ',
