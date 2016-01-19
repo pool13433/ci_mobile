@@ -101,12 +101,14 @@ class Mobile extends CI_Controller {
         $param3 = (empty($_GET['param3']) ? '' : $_GET['param3']);
         $param4 = (empty($_GET['param4']) ? '' : $_GET['param4']);
         $param5 = (empty($_GET['param5']) ? '' : $_GET['param5']);
+        //$param5 = $_GET['param5'];
         $productId = (empty($_GET['productId']) ? '' : $_GET['productId']);
 
         $this->load->model('datamodel');
         $this->datamodel->field_name = ' * ';
         $this->datamodel->table_name = ' mproduct';
-
+		
+		
         $conditions = ' WHERE 1=1';
         if (!empty($param1)) {
             $conditions .= ' AND (';
@@ -133,13 +135,13 @@ class Mobile extends CI_Controller {
         if (!empty($param3)) {
             $conditions .= ' AND product_id = ' . $param3;
         }
-        if (!empty($param4) && (!empty($param5) || intval($param5))) {
+        if (!empty($param4)) {
             $conditions .= ' AND ' . $param4 . ' = \'' . $param5 . '\'';
         }
         if (intval($productId)) {
             $conditions .= ' AND product_id != ' . $productId;
         }
-        $conditions .= ' ORDER BY brand_id,product_name DESC';
+        $conditions .= " ORDER BY  cpu_vol desc,ram desc";
         //var_dump($conditions);
 
         $this->datamodel->condition = $conditions;
@@ -173,6 +175,12 @@ class Mobile extends CI_Controller {
             'param4' => $param4,
             'param5' => $param5,
         );
+        
+        $this->data['param1']=$param1;
+        $this->data['param2']=$param2;
+        $this->data['param3']=$param3;
+        $this->data['param4']=$param4;
+        $this->data['param5']=$param5;
         $this->data['colors'] = $this->myutil->colors;
 
         $this->load->view('header', $this->data);

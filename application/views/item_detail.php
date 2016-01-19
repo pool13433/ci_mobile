@@ -24,11 +24,13 @@
                                 <div class="row">
                                     <?php foreach ($$value['variable_loop'] as $key => $attr) { ?>
                                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                        <a class="small-box-footer" href="javascript:void(0)" 
+                                                   onclick="modalRelateTarget(<?=$product->product_id?>,'<?= $key ?>',<?= $product->$key ?>,'<?= $attr['caption'] ?>','<?=$attr['desc']?>')">
                                             <!-- small box -->
                                             <div class="small-box <?=$value['color']?>">
                                                 <div class="inner">
                                                     <h3>
-                                                        <?php echo $product->$key ?> <?php echo $attr['caption'] ?>
+                                                        <?= $product->$key != 0 ? $product->$key." ".$attr['caption']:"N/A"?>                                                        
                                                     </h3>
                                                     <p>
                                                         <strong><?php echo $attr['desc'] ?></strong>
@@ -37,11 +39,11 @@
                                                 <div class="icon">
                                                     <i class="<?php echo $attr['icon'] ?>"></i>
                                                 </div>
-                                                <a class="small-box-footer" href="javascript:void(0)" 
-                                                   onclick="modalRelateTarget(<?=$product->product_id?>,'<?= $key ?>',<?= $product->$key ?>,'<?= $attr['caption'] ?>','<?=$attr['desc']?>')">
+                                         <span class="small-box-footer">       
                                                     ยี่ห้อ/รุ่น ที่เกี่ยวข้อง <i class="fa fa-arrow-circle-right"></i>
-                                                </a>
+                                         </span>      
                                             </div>
+                                             </a>
                                         </div><!-- ./col -->
                                     <?php } ?>
 
